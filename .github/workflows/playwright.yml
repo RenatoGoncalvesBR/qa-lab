@@ -20,7 +20,10 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test
     - name: Install K6
-      run: sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg lsb-release && curl https://dl.k6.io/key.gpg | sudo apt-key add - && echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6-stable.list && sudo apt-get update && sudo apt-get install k6
+      run: |
+        curl https://github.com/grafana/k6/releases/download/v0.51.0/k6-v0.51.0-linux-amd64.tar.gz -L -o k6.tar.gz
+        tar xvf k6.tar.gz
+        sudo mv k6-v0.51.0-linux-amd64/k6 /usr/local/bin/
     - name: Run K6 load tests
       run: k6 run loadtest.js
     - uses: actions/upload-artifact@v4
