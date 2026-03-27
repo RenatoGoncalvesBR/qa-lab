@@ -7,4 +7,6 @@ RUN npm install
 
 COPY . .
 
+ENV DOCKER_BUILD=true
+
 CMD ["npx", "playwright", "test"]

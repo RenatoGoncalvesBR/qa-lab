@@ -11,6 +11,10 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+// Include branded browsers (Chrome, Edge) only when not in Docker
+const includeBrandedBrowsers = !process.env.DOCKER_BUILD;
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -58,6 +62,18 @@ export default defineConfig({
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
     },
+
+    ...(includeBrandedBrowsers ? [
+      /* Test against branded browsers (only when not in Docker) */
+      {
+        name: 'Microsoft Edge',
+        use: { ...devices['Desktop Edge'], channel: 'msedge' },
+      },
+      {
+        name: 'Google Chrome',
+        use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+      },
+    ] : []),
   ],
 
   /* Run your local dev server before starting the tests */
