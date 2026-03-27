@@ -4,6 +4,7 @@ import { check, sleep } from 'k6';
 export const options = {
   vus: 20, // usuários virtuais
   duration: '20s', // tempo do teste
+  summaryTimeUnit: 'ms', // padronizar saída em milissegundos
 };
 
 export default function () {
