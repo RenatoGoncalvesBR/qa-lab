@@ -7,7 +7,7 @@ test('Adicionar tarefa na lista', async ({ page }) => {
   await todoPage.goto();
   await todoPage.addTodo('Estudar Playwright');
 
-  await expect(todoPage.todoItems).toContainText('Estudar Playwright');
+  await expect(todoPage.todoItems).toContainText('Estudar ERRADO');
   await todoPage.removeFirstTodo();
   await expect(todoPage.todoItems).toHaveCount(0);
 });
