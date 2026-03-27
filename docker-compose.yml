@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  qa-tests:
+    build: .
+    container_name: qa-lab-tests
+    environment:
+      - DOCKER_BUILD=true
+    volumes:
+      # Salvar relatórios do Playwright
+      - ./playwright-report:/app/playwright-report
+      # Salvar resultados dos testes
+      - ./test-results:/app/test-results
+    working_dir: /app
+    # Garante que o container não falha ao finalizar
+    restart: "no"
