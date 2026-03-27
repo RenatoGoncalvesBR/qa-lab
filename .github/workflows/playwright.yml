@@ -23,12 +23,6 @@ jobs:
       - name: Instalar browsers Playwright
         run: npx playwright install --with-deps
 
-      - name: Rodar testes de API
-        run: npx playwright test api
-
-      - name: Rodar testes E2E
-        run: npx playwright test tests
-
       - name: Instalar k6
         run: |
           sudo apt update
@@ -38,5 +32,5 @@ jobs:
           sudo apt update
           sudo apt install k6 -y
 
-      - name: Rodar teste de performance
-        run: k6 run loadtest.js
+      - name: Rodar rotina QA completa
+        run: npm run test:qa
